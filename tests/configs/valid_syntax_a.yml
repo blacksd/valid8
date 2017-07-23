@@ -1,0 +1,16 @@
+---
+default:
+  ttl: 300
+  value: "{{ name }}.{{ zone }}"
+records:
+  txt:
+  cname:
+    -
+      name: "tm"
+      value: "tm.contactlab.it"
+    -
+      name: "lm"
+      value: "lm.contactlab.it"
+  a:
+  ns:
+  mx:
