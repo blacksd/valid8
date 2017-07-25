@@ -1,0 +1,64 @@
+---
+defaults:
+variables:
+  zone: atestdomain.com.
+  mailru_token: 123456
+  dkim_key: "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+records:
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: txt
+    value: "mailru-verification: {{ mailru_token }}"
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: txt
+    value: "v=spf1 include:t.contactlab.it -all"
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: txt
+    value: "spf2.0/pra include:senderid-a.contactlab.it -all"
+  -
+    ttl: 86400
+    name: "clab1._domainkey.{{ zone }}"
+    type: txt
+    value: "DKIM1;k=rsa;h=sha256;p={{ dkim_key }}"
+  -
+    ttl: 86400
+    name: "t"
+    type: cname
+    value: "{{ record.name }}.contactlab.it."
+  -
+    ttl: 86400
+    name: "lm"
+    type: cname
+    value: "{{ record.name }}.contactlab.it."
+  -
+    ttl: 86400
+    name: "cs"
+    type: cname
+    value: "{{ record.name }}.contactlab.it."
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: ns
+    value: "dns.mamba.contactlab.it."
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: ns
+    value: "dns.mocassino.contactlab.it."
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: mx
+    value: "mail.mamba.contactlab.it."
+    weight: 10
+  -
+    ttl: 86400
+    name: "{{ zone }}"
+    type: mx
+    value: "mail.mocassino.contactlab.it."
+    weight: 20

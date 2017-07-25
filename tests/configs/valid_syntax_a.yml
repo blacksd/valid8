@@ -1,16 +1,28 @@
 ---
 default:
   ttl: 300
-  value: "{{ name }}.{{ zone }}"
+  name: "{{ zone }}"
+  value: "{{ this.name }}.contactlab.it."
 records:
   txt:
+    - value: "mailru-verification: {{ mailru_token }}"
+    - value: "v=spf1 include:t.contactlab.it -all"
+    - value: "spf2.0/pra include:senderid-a.contactlab.it -all"
+    -
+      name: "clab1._domainkey.{{ zone }}"
+      value: "DKIM1;k=rsa;h=sha256;p={{ dkim_key }}"
   cname:
-    -
-      name: "tm"
-      value: "tm.contactlab.it"
-    -
-      name: "lm"
-      value: "lm.contactlab.it"
+    - name: "t"
+    - name: "lm"
+    - name: "cs"
   a:
   ns:
+    - value: "dns.mamba.contactlab.it."
+    - value: "dns.mocassino.contactlab.it."
   mx:
+    -
+      value: "mail.mamba.contactlab.it."
+      weight: 10
+    -
+      value: "mail.mocassino.contactlab.it."
+      weight: 20
