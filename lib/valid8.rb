@@ -5,6 +5,7 @@ require 'awesome_print'
 
 class Valid8
   attr_reader :settings
+  ALLOWED_TYPES=["mx","a","cname","txt","ns"]
 
   # TODO:
   # - logger
